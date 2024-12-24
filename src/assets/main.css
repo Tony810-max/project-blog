@@ -1,0 +1,18 @@
+@import "normalize.css";
+@import "vuetify/styles";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #fb2359;
+  --secondary-color: #000;
+  --red-color: red;
+  --gold-color: #ffd700;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
