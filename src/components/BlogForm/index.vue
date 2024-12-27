@@ -11,11 +11,18 @@ import Menubar from "./Menubar.vue";
 import TextAlign from "@tiptap/extension-text-align";
 import ImageResize from "tiptap-extension-resize-image";
 import Paragraph from "@tiptap/extension-paragraph";
+import ElenmentEnd from "../ElenmentEnd.vue";
+import Button from "../Button.vue";
 
 const contentBlog = ref("");
 const title = ref("");
-const urlImg = ref("");
-const checkUpload = ref(true);
+const author = ref("");
+const urlImgContentBlog = ref("");
+const file = ref("");
+const urlImgBlog = ref("");
+
+const isUpload = ref(false);
+const isUploadImgBLog = ref(false);
 
 const emit = defineEmits(["handle-blog"]);
 const props = defineProps({
@@ -29,7 +36,12 @@ const props = defineProps({
 const checkSubmit = computed(() => props.disableButton);
 
 const checkEmpty = computed(() => {
-  return !title.value.trim() || !contentBlog.value.trim();
+  return (
+    !title.value.trim() ||
+    !author.value ||
+    !file.value ||
+    !contentBlog.value.trim()
+  );
 });
 
 const editor = useEditor({
@@ -56,8 +68,9 @@ const editor = useEditor({
   },
 });
 
-const uploadFile = async (file) => {
-  checkUpload.value = false;
+const uploadFile = async (file, type) => {
+  isUpload.value = true;
+  isUploadImgBLog.value = true;
   toast.warn("Please wait while the image is uploading...", {
     autoClose: 3000,
   });
@@ -79,8 +92,12 @@ const uploadFile = async (file) => {
       },
     });
 
-    if (response) {
-      urlImg.value = response.data?.url;
+    if (response && type === "imgContentBLog") {
+      urlImgContentBlog.value = response.data?.url;
+      isUpload.value = false;
+    } else {
+      urlImgBlog.value = response.data?.url;
+      isUploadImgBLog.value = false;
     }
   } catch (error) {
     console.log(error);
@@ -89,19 +106,33 @@ const uploadFile = async (file) => {
 
 const addImage = async (e) => {
   const file = e.target.files[0];
-  await uploadFile(file);
+  await uploadFile(file, "imgContentBLog");
 
-  if (urlImg.value !== "") {
-    editor.value.chain().focus().setImage({ src: urlImg.value }).run();
-    checkUpload.value = true;
+  if (urlImgContentBlog.value !== "") {
+    editor.value
+      .chain()
+      .focus()
+      .setImage({ src: urlImgContentBlog.value })
+      .run();
+    isUpload.value = false;
   }
+};
+
+const addImageBlog = async (e) => {
+  const fileImg = e.target.files[0];
+  console.log(fileImg);
+  file.value = fileImg.name;
+  isUploadImgBLog.value = false;
+  await uploadFile(fileImg, "imgBLog");
 };
 
 const sendData = () => {
   const blog = {
     title: title.value,
     content: contentBlog.value,
-    image: urlImg.value,
+    image: urlImgContentBlog.value,
+    imageBlog: urlImgBlog.value,
+    author: author.value,
   };
 
   emit("handle-blog", blog);
@@ -116,11 +147,16 @@ onUnmounted(() => {
 
 <template>
   <form class="space-y-2" @submit.prevent="sendData">
-    <input
-      v-model.lazy="title"
-      placeholder="Title blog..."
-      class="w-full border border-black rounded-md px-2 py-2"
+    <v-text-field v-model.lazy="title" label="Title blog"></v-text-field>
+
+    <v-text-field
+      type="file"
+      accept="image/*"
+      @change="addImageBlog"
+      :disabled="isUploadImgBLog"
     />
+    <img v-if="urlImgBlog" :src="urlImgBlog" class="w-1/2 h-1/2" />
+
     <div class="border-black border py-1 px-4 rounded min-h-52 space-y-4">
       <div class="border-b border-black py-2">
         <div
@@ -134,15 +170,15 @@ onUnmounted(() => {
               @change="addImage"
               hidden
               ref="fileInput"
-              :disabled="!checkUpload"
+              :disabled="isUpload"
             />
             <img
               src="/src/assets/icons/image.svg"
               alt="image icon"
               class="w-5 h-5 cursor-pointer border"
               :class="{
-                'hover:cursor-default opacity-50 ': !checkUpload,
-                'hover:opacity-70': checkUpload,
+                'hover:cursor-default opacity-50 ': isUpload,
+                'hover:opacity-70': !isUpload,
               }"
               @click="$refs.fileInput.click()"
             />
@@ -151,19 +187,23 @@ onUnmounted(() => {
       </div>
       <editor-content :editor="editor" />
     </div>
-    <div class="flex justify-end">
-      <button
-        type="submit"
-        :class="[
-          'font-sans bg-primary-color px-4 py-1 text-white rounded-md hover:cursor-pointer',
-          { 'opacity-50 cursor-default': checkSubmit || checkEmpty },
-          { 'hover:opacity-60': !(checkSubmit || checkEmpty) },
-        ]"
-        :disabled="checkEmpty || checkSubmit"
-      >
-        {{ nameButton }}
-      </button>
-    </div>
+    <v-text-field v-model.lazy="author" label="Author"></v-text-field>
+    <ElenmentEnd>
+      <template #element>
+        <Button name="Back" name-href="home" />
+        <button
+          type="submit"
+          :class="[
+            'font-sans bg-primary-color px-4 py-1 text-white rounded-md hover:cursor-pointer',
+            { 'opacity-50 cursor-default': checkSubmit || checkEmpty },
+            { 'hover:opacity-60': !(checkSubmit || checkEmpty) },
+          ]"
+          :disabled="checkEmpty || checkSubmit"
+        >
+          {{ nameButton }}
+        </button>
+      </template>
+    </ElenmentEnd>
   </form>
 </template>
 

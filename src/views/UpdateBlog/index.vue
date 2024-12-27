@@ -7,17 +7,23 @@ import { toast } from "vue3-toastify";
 const route = useRoute();
 
 const handleUpdateBLog = (data) => {
+  console.log("data", data);
   const idBlog = route.params.id;
   const blogData = JSON.parse(localStorage.getItem("blogs"));
 
   const findIndex = blogData.findIndex((blog) => blog.id == idBlog);
+
   if (findIndex !== -1) {
     blogData[findIndex] = {
-      title: data?.title,
-      content: data?.content,
-      image: data?.image,
-      id: Number(idBlog),
+      ...blogData[findIndex],
+      title: data.title,
+      content: data.content,
+      image: data.image,
+      imageBlog: data.imageBlog,
+      author: data.author,
+      dateUpdate: new Date().toISOString(),
     };
+    console.log(blogData[findIndex]);
     localStorage.setItem("blogs", JSON.stringify(blogData));
     toast.success("BLog updated successfully");
     setTimeout(() => {

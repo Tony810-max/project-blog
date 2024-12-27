@@ -10,16 +10,15 @@ const isLoading = defineModel("isLoading");
 const isDialogActive = ref(false);
 
 const updateBlogData = inject("updateBlogData");
+const blogData = inject("blogData");
+console.log("blogData", blogData);
 
 const handleDeleteBlog = () => {
-  const blogLocalStorage = JSON.parse(localStorage.getItem("blogs"));
-
-  const filterBlog = blogLocalStorage.filter(
-    (blog) => blog?.id !== idBlog.idBlog
-  );
+  const filterBlog = blogData.filter((blog) => blog?.id !== idBlog.idBlog);
 
   if (updateBlogData) {
     updateBlogData(filterBlog);
+    console.log(filterBlog);
   }
 
   localStorage.setItem("blogs", JSON.stringify(filterBlog));

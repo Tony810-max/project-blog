@@ -2,14 +2,16 @@
 import { toast } from "vue3-toastify";
 import { useRouter } from "vue-router";
 import BlogForm from "@/components/BlogForm/index.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const router = useRouter();
 const disableButton = ref(false);
+const isLoading = ref(true);
 
 const handleCreateBlog = async (data) => {
   const blog = data;
   const blogExist = JSON.parse(localStorage.getItem("blogs")) || [];
+  const user = JSON.parse(localStorage.getItem("user-current"));
 
   if (blogExist) {
     toast.success("Blog created successfully");
@@ -18,7 +20,7 @@ const handleCreateBlog = async (data) => {
       "blogs",
       JSON.stringify([
         ...blogExist,
-        { ...blog, id: Number(blogExist?.length + 1) },
+        { ...blog, id: Number(blogExist?.length + 1),dateCreate: new Date().toISOString(), user },
       ])
     );
     setTimeout(() => {
@@ -26,12 +28,28 @@ const handleCreateBlog = async (data) => {
     }, 1500);
   }
 };
+
+onMounted(() => {
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 250);
+});
 </script>
 
 <template>
-  <BlogForm
-    @handle-blog="handleCreateBlog"
-    nameButton="Create Blog"
-    :disableButton="disableButton"
-  />
+  <div>
+    <v-skeleton-loader
+      v-if="isLoading"
+      v-for="index in 10"
+      type="text"
+    ></v-skeleton-loader>
+  </div>
+  <div v-if="!isLoading" class="space-y-2">
+    <span class="font-sans text-2xl font-bold">Create Blog</span>
+    <BlogForm
+      @handle-blog="handleCreateBlog"
+      nameButton="Create"
+      :disableButton="disableButton"
+    />
+  </div>
 </template>

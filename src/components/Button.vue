@@ -6,12 +6,15 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  loading: Boolean,
   nameHref: String,
   type: String,
 });
 </script>
 <template>
   <v-btn
+    :disabled="disable"
+    :loading="loading"
     :type="[type === 'submit' ? 'submit' : 'button']"
     :to="{ name: nameHref }"
     variant="outlined"
@@ -20,7 +23,7 @@ const props = defineProps({
       { class: true },
       !disable ? 'hover:opacity-60' : 'opacity-50 cursor-default',
     ]"
-    :style="{ backgroundColor: 'var(--primary-color)', color: 'white' }"
+    :style="{ backgroundColor: '#0549ff', color: 'white' }"
     >{{ name }}
   </v-btn>
 </template>

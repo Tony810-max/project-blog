@@ -1,6 +1,6 @@
 <script setup>
+import { format } from "date-fns";
 import { onBeforeMount, ref } from "vue";
-
 const blogs = ref([]);
 
 const isLoading = ref(false);
@@ -36,7 +36,11 @@ onBeforeMount(() => {
         <span class="w-full block font-sans text-xl font-bold text-center">{{
           blog.title
         }}</span>
-
+        <span
+          v-if="blog.date"
+          class="w-full block font-sans text-xl font-bold text-center"
+          >{{ format(new Date(blog.date), "dd-MM-yyyy") }}</span
+        >
         <RouterLink
           :to="{ name: 'detail-blog', params: { id: blog.id } }"
           class="w-full block text-right font-sans text-base font-medium hover:cursor-pointer hover:opacity-70 underline text-primary-color"

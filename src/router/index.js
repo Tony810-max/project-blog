@@ -4,6 +4,8 @@ import CreateBlog from "@/views/CreateBlog/index.vue";
 import ManageBlog from "@/views/ManageBlog/index.vue";
 import UpdateBlog from "@/views/UpdateBlog/index.vue";
 import DetailBlog from "@/views/DetailBlog/index.vue";
+import LoginPage from "@/views/Auth/LoginPage/index.vue";
+import RegisterPage from "@/views/Auth/RegisterPage/index.vue";
 
 export const ROUTE = [
   {
@@ -30,6 +32,16 @@ export const ROUTE = [
     path: "/detail-blog/:id",
     name: "detail-blog",
     component: DetailBlog,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: LoginPage,
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: RegisterPage,
   },
 ];
 

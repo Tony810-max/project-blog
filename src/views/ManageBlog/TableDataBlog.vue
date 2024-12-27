@@ -1,19 +1,19 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import DeleteBlog from "./DeleteBlog.vue";
-import { inject } from "vue";
 
 const props = defineProps({
   blogData: Array,
 });
+
+console.log("oke");
+
 const isLoading = defineModel("isLoading");
 
-const blog = inject("blogData");
-console.log(blog.value);
 
 const onUpdateBlog = (newBlog) => {
-  console.log(newBlog);
   props.blogData.value = newBlog;
+
   setTimeout(() => {
     isLoading.value = true;
   }, 250);
@@ -24,7 +24,6 @@ const onUpdateBlog = (newBlog) => {
     <thead>
       <tr>
         <th class="font-sans text-center w-24">#</th>
-        <th class="font-sans text-center w-24">Id Blog</th>
         <th class="font-sans text-center">Title</th>
         <th class="font-sans text-center">Image</th>
         <th class="font-sans text-center">Edit Blog</th>
@@ -52,15 +51,14 @@ const onUpdateBlog = (newBlog) => {
           <v-skeleton-loader type="text"></v-skeleton-loader>
         </td>
       </tr>
-      <tr v-if="isLoading" v-for="(item, index) in blog.list" :key="item.name">
+      <tr v-if="isLoading" v-for="(item, index) in blogData" :key="item.name">
         <td class="font-sans text-center">{{ index + 1 }}</td>
-        <td class="font-sans text-center">{{ item?.id }}</td>
         <td class="font-sans text-center">{{ item?.title }}</td>
         <td class="font-sans text-center flex justify-center">
           <img
             :src="
-              item?.image !== ''
-                ? item?.image
+              item?.imageBlog !== ''
+                ? item?.imageBlog
                 : 'src/assets/images/imgEmty.webp'
             "
             :alt="item?.title"
