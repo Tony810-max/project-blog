@@ -27,7 +27,12 @@ const handleLogin = () => {
 
   const emailLogin = email.value.toLowerCase();
 
-  const users = JSON.parse(localStorage.getItem("users"));
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
+  if (users.length <= 0) {
+    isLoading.value = false;
+    return toast.error("No user found");
+  }
 
   const findEmail = users.find((user) =>
     user.email.toLowerCase().includes(emailLogin)
