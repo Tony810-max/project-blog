@@ -62,12 +62,17 @@ const onUpdateBlog = (newBlog) => {
             class=""
           />
         </td>
-        <td class="font-sans text-center">
+        <td class="font-sans">
           <RouterLink
             :to="{ name: 'update-blog', params: { id: item?.id } }"
-            class="font-sans italic hover:opacity-70 hover:underline"
-            >Edit blog</RouterLink
+            class="flex justify-center"
           >
+            <img
+              src="/src/assets/icons/penIcon.svg"
+              alt="pen icon"
+              class="w-6 h-6 hover:opacity-70"
+            />
+          </RouterLink>
         </td>
         <td class="font-sans text-center">
           <DeleteBlog

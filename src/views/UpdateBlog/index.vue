@@ -26,7 +26,7 @@ const handleUpdateBLog = (data) => {
     toast.success("BLog updated successfully");
     setTimeout(() => {
       router.push({ name: "manage-blog" });
-    }, 500);
+    }, 1000);
   }
 };
 </script>

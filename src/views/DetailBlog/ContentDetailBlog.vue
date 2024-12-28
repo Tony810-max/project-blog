@@ -1,5 +1,5 @@
 <script setup>
-import Button from "@/components/Button.vue";
+import { format } from "date-fns";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
@@ -11,13 +11,23 @@ const filterBlog = blog.find((blog) => Number(blog.id) === Number(idBlog));
 </script>
 <template>
   <div class="space-y-4">
-    <div class="flex justify-between">
-      <Button name-href="home" name="Go to home" />
-      <Button name-href="update-blog" name="update blog" />
+    <div class="flex justify-between items-center">
+      <span v-if="filterBlog.dateCreate"
+        >Date created
+        <strong>
+          {{ format(new Date(filterBlog.dateCreate), "dd-MM-yyyy") }}</strong
+        ></span
+      >
+      <span class="font-sans text-xl block font-bold uppercase">{{
+        filterBlog?.title
+      }}</span>
+      <span v-if="filterBlog.dateUpdate"
+        >Last updated
+        <strong>
+          {{ format(new Date(filterBlog.dateUpdate), "dd-MM-yyyy") }}</strong
+        ></span
+      >
     </div>
-    <span class="font-sans text-xl text-center block font-bold uppercase">{{
-      filterBlog?.title
-    }}</span>
     <p v-html="filterBlog?.content"></p>
   </div>
 </template>

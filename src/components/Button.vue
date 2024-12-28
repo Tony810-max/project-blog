@@ -13,17 +13,17 @@ const props = defineProps({
 </script>
 <template>
   <v-btn
+    variant="outlined"
     :disabled="disable"
     :loading="loading"
     :type="[type === 'submit' ? 'submit' : 'button']"
     :to="{ name: nameHref }"
-    variant="outlined"
     :class="[
       'font-sans ',
       { class: true },
       !disable ? 'hover:opacity-60' : 'opacity-50 cursor-default',
     ]"
-    :style="{ backgroundColor: '#0549ff', color: 'white' }"
+    :style="{ backgroundColor: 'var(--primary-color)', color: 'white' }"
     >{{ name }}
   </v-btn>
 </template>

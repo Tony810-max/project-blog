@@ -1,5 +1,4 @@
 <script setup>
-import Button from "@/components/Button.vue";
 import { ref } from "vue";
 
 const valueSearch = ref("");
@@ -20,8 +19,9 @@ const handleClearFilter = () => {
       hide-details="auto"
       label="Enter Title Blog"
       v-model="valueSearch"
+      clearable
+      @click:clear="handleClearFilter"
       @keyup.enter="sendValueSearch"
-    ></v-text-field>
-    <Button class="h-full" name="Clear filter" @Click="handleClearFilter" />
+    />
   </div>
 </template>

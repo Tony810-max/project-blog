@@ -20,7 +20,12 @@ const handleCreateBlog = async (data) => {
       "blogs",
       JSON.stringify([
         ...blogExist,
-        { ...blog, id: Number(blogExist?.length + 1),dateCreate: new Date().toISOString(), user },
+        {
+          ...blog,
+          id: Number(blogExist?.length + 1),
+          dateCreate: new Date().toISOString(),
+          user,
+        },
       ])
     );
     setTimeout(() => {

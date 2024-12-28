@@ -51,7 +51,7 @@ const editor = useEditor({
     }),
     Paragraph.configure({
       HTMLAttributes: {
-        class: "px-2 text-justify",
+        class: "px-2",
       },
     }),
 
@@ -69,8 +69,11 @@ const editor = useEditor({
 });
 
 const uploadFile = async (file, type) => {
-  isUpload.value = true;
-  isUploadImgBLog.value = true;
+  if (type === "imgContentBLog") {
+    isUpload.value = true;
+  } else {
+    isUploadImgBLog.value = true;
+  }
   toast.warn("Please wait while the image is uploading...", {
     autoClose: 3000,
   });
@@ -187,9 +190,14 @@ onUnmounted(() => {
       <editor-content :editor="editor" />
     </div>
     <v-text-field v-model.lazy="author" label="Author"></v-text-field>
-    <ElenmentEnd>
+    <ElenmentEnd class="gap-2">
       <template #element>
-        <Button name="Back" name-href="home" />
+        <Button
+          variant="outlined"
+          name="Back"
+          name-href="home"
+          :style="{ backgroundColor: transparent, color: black }"
+        />
         <button
           type="submit"
           :class="[

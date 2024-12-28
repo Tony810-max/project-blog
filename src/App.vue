@@ -1,5 +1,5 @@
 <script setup>
-import HeaderMain from "@/components/layouts/HeaderMain/index.vue";
+import HeaderMain from "@/components/layouts/HeaderMain.vue";
 import Vertical from "@/components/Vertical.vue";
 </script>
 
