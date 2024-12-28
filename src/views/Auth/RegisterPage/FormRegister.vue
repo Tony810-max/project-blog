@@ -13,13 +13,19 @@ const confirmPassword = ref("");
 const rules = {
   required: (value) => !!value || "Please enter a password",
   min: (v) => v.length >= 8 || "Min 8 characters",
+  emailRules: (v) =>
+    !v ||
+    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+    "E-mail must be valid",
   passwordMatch: () =>
     confirmPassword.value === password.value ||
     "The password confirmation does not match.",
 };
 
 const isCheck = computed(() => {
-  if (!email.value || !password.value || !confirmPassword.value) {
+  const isEmailValid = rules.emailRules(email.value) === true;
+  const isPasswordEntered = !!password.value;
+  if (!(isEmailValid && isPasswordEntered)) {
     return true;
   }
   return password.value !== confirmPassword.value;
@@ -52,6 +58,7 @@ const handleRegister = () => {
 <template>
   <form class="min-w-[25rem] space-y-2">
     <v-text-field
+      :rules="[rules.required, rules.emailRules]"
       v-model="email"
       label="Email"
       type="input"
