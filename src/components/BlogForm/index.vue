@@ -151,7 +151,8 @@ onUnmounted(() => {
   <form class="space-y-2" @submit.prevent="sendData">
     <v-text-field v-model.lazy="title" label="Title blog"></v-text-field>
 
-    <v-text-field
+    <input
+      label="Image blog"
       type="file"
       accept="image/*"
       @change="addImageBlog"
