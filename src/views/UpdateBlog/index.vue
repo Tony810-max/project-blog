@@ -7,7 +7,6 @@ import { toast } from "vue3-toastify";
 const route = useRoute();
 
 const handleUpdateBLog = (data) => {
-  console.log("data", data);
   const idBlog = route.params.id;
   const blogData = JSON.parse(localStorage.getItem("blogs"));
 
@@ -23,12 +22,11 @@ const handleUpdateBLog = (data) => {
       author: data.author,
       dateUpdate: new Date().toISOString(),
     };
-    console.log(blogData[findIndex]);
     localStorage.setItem("blogs", JSON.stringify(blogData));
     toast.success("BLog updated successfully");
     setTimeout(() => {
       router.push({ name: "manage-blog" });
-    }, 250);
+    }, 500);
   }
 };
 </script>

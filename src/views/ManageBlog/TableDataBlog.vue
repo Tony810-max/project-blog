@@ -6,10 +6,7 @@ const props = defineProps({
   blogData: Array,
 });
 
-console.log("oke");
-
 const isLoading = defineModel("isLoading");
-
 
 const onUpdateBlog = (newBlog) => {
   props.blogData.value = newBlog;

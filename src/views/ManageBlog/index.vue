@@ -4,6 +4,7 @@ import TableDataBlog from "./TableDataBlog.vue";
 import { ref } from "vue";
 import EmptyBlog from "./EmptyBlog.vue";
 import SearchBlog from "./SearchBlog.vue";
+import { useRouter } from "vue-router";
 
 const isLoading = ref(false);
 
@@ -12,6 +13,7 @@ const blogData = reactive({
 });
 const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 const user = JSON.parse(localStorage.getItem("user-current"));
+const router = useRouter();
 
 const blogFilterAuthor = blogs.filter(
   (blog) => blog.user?.email === user.email
@@ -19,18 +21,10 @@ const blogFilterAuthor = blogs.filter(
 
 blogData.list = blogFilterAuthor;
 
-onBeforeMount(() => {
-  setTimeout(() => {
-    isLoading.value = true;
-  }, 250);
-});
-
 provide("blogData", blogFilterAuthor);
 
 provide("updateBlogData", (newData) => {
   blogData.list = newData;
-
-  console.log("newData", newData);
 
   setTimeout(() => {
     isLoading.value = true;
@@ -50,8 +44,6 @@ const handleSearchblog = (data) => {
     blog.title.toLowerCase().includes(data.toLowerCase())
   );
 
-  console.log("searchBlog", searchBlog);
-
   isLoading.value = false;
 
   blogData.list = searchBlog;
@@ -60,6 +52,15 @@ const handleSearchblog = (data) => {
     isLoading.value = true;
   }, 250);
 };
+
+onBeforeMount(() => {
+  if (!user) {
+    router.push("/");
+  }
+  setTimeout(() => {
+    isLoading.value = true;
+  }, 250);
+});
 </script>
 
 <template>

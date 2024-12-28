@@ -2,12 +2,12 @@
 import Vertical from "@/components/Vertical.vue";
 import FormLogin from "./FormLogin.vue";
 import ElenmentEnd from "@/components/ElenmentEnd.vue";
-import { onBeforeMount } from "vue";
+import { onBeforeMount, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-onBeforeMount(() => {
+onMounted(() => {
   const userCurrent = JSON.parse(localStorage.getItem("user-current"));
 
   if (userCurrent) {

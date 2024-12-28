@@ -24,32 +24,34 @@ const handleLogOut = () => {
 
 <template>
   <div class="flex justify-between items-center p-4">
-    <RouterLink
-      :to="{ name: 'home' }"
-      class="text-3xl font-sans text-red-500 italic font-bold hover:opacity-70"
-      >Blog
-    </RouterLink>
-    <div class="space-x-2">
+    <div>
       <RouterLink
         :to="{ name: 'home' }"
-        :class="{ 'text-primary-color': currentPath === '/' }"
-        class="hover:opacity-70"
-        >Home</RouterLink
-      >
-      <RouterLink
-        v-if="userCurr"
-        :to="{ name: 'manage-blog' }"
-        :class="{ 'text-primary-color': currentPath === '/manage-blog' }"
-        class="hover:opacity-70"
-        >Manage Blog</RouterLink
-      >
-      <RouterLink
-        v-if="userCurr"
-        :to="{ name: 'create-blog' }"
-        :class="{ 'text-primary-color': currentPath === '/create-blog' }"
-        class="hover:opacity-70"
-        >Create blog</RouterLink
-      >
+        class="text-3xl font-sans text-red-500 italic font-bold hover:opacity-70"
+        >Blog
+      </RouterLink>
+      <div class="space-x-2">
+        <RouterLink
+          :to="{ name: 'home' }"
+          :class="{ 'text-primary-color': currentPath === '/' }"
+          class="hover:opacity-70"
+          >Home</RouterLink
+        >
+        <RouterLink
+          v-if="userCurr"
+          :to="{ name: 'manage-blog' }"
+          :class="{ 'text-primary-color': currentPath === '/manage-blog' }"
+          class="hover:opacity-70"
+          >Manage Blog</RouterLink
+        >
+        <RouterLink
+          v-if="userCurr"
+          :to="{ name: 'create-blog' }"
+          :class="{ 'text-primary-color': currentPath === '/create-blog' }"
+          class="hover:opacity-70"
+          >Create blog</RouterLink
+        >
+      </div>
     </div>
     <Button v-if="userCurr" name="Log Out" @click="handleLogOut" />
     <div v-if="!userCurr" class="space-x-2">

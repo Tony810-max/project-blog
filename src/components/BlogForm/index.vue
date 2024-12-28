@@ -120,7 +120,6 @@ const addImage = async (e) => {
 
 const addImageBlog = async (e) => {
   const fileImg = e.target.files[0];
-  console.log(fileImg);
   file.value = fileImg.name;
   isUploadImgBLog.value = false;
   await uploadFile(fileImg, "imgBLog");
