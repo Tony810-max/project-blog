@@ -17,12 +17,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <Vertical class="items-center min-h-[calc(100vh-56px)]">
+  <Vertical class="items-center min-h-[calc(100vh-56px)] px-4">
     <template #block>
       <div
         class="px-10 py-4 flex flex-col gap-6 border-2 border-slate-500 rounded-md shadow-lg"
       >
-        <span class="text-center font-sans text-3xl font-bold"
+        <span class="text-center font-sans text-xl sm:text-3xl font-bold"
           >Log in to the account</span
         >
         <FormLogin />

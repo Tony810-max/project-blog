@@ -56,7 +56,7 @@ const handleRegister = () => {
 };
 </script>
 <template>
-  <form class="min-w-[25rem] space-y-2">
+  <form class="min-w-[20rem] sm:min-w-[25rem] space-y-2">
     <v-text-field
       :rules="[rules.required, rules.emailRules]"
       v-model="email"

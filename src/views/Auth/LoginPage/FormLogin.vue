@@ -68,7 +68,7 @@ const handleLogin = () => {
 };
 </script>
 <template>
-  <form class="min-w-[25rem]">
+  <form class="min-w-[20rem] sm:min-w-[25rem]">
     <v-text-field
       :rules="[rules.required, rules.emailRules]"
       v-model="email"

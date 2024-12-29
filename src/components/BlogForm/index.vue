@@ -148,7 +148,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <form class="space-y-2" @submit.prevent="sendData">
+  <form class="space-y-2 py-2" @submit.prevent="sendData">
     <v-text-field v-model.lazy="title" label="Title blog"></v-text-field>
 
     <v-text-field v-model.lazy="author" label="Author"></v-text-field>
