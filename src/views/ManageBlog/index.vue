@@ -64,7 +64,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div class="space-y-2">
+  <div class="space-y-2 px-2">
     <SearchBlog @searchValue="handleSearchblog" />
     <v-skeleton-loader v-if="!isLoading" type="table"></v-skeleton-loader>
     <EmptyBlog v-if="blogData.list.length <= 0 && isLoading" />
