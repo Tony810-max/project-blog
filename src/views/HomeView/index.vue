@@ -18,7 +18,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-3 gap-2">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 px-4">
     <v-skeleton-loader
       type="card"
       v-if="!isLoading"
@@ -27,7 +27,7 @@ onBeforeMount(() => {
     <template v-for="(blog, index) in blogs" :key="blog.id">
       <div
         v-if="isLoading"
-        class="border px-4 py-2 rounded-xl space-y-4 shadow-xl"
+        class="border px-4 py-2 rounded-xl space-y-4 shadow-md lg:shadow-xl"
       >
         <img
           :src="

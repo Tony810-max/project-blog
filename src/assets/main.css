@@ -1,9 +1,9 @@
 @import "normalize.css";
+@import "vuetify/styles";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "vuetify/styles";
 
 :root {
   --primary-color: #0549ff;
