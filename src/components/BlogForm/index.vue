@@ -152,7 +152,7 @@ onUnmounted(() => {
     <v-text-field v-model.lazy="title" label="Title blog"></v-text-field>
 
     <v-text-field v-model.lazy="author" label="Author"></v-text-field>
-    <div class="flex gap-2 items-center">
+    <div class="flex sm:flex-row flex-col gap-2 sm:items-center">
       <label class="text-base">Image blog</label>
       <input
         type="file"

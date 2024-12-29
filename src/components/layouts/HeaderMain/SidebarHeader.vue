@@ -42,8 +42,8 @@ const handleNavigate = (href) => {
 </script>
 
 <template>
-  <v-layout>
-    <v-navigation-drawer v-model="open" temporary>
+  <v-layout >
+    <v-navigation-drawer v-model="open" temporary class="px-2">
       <ElenmentEnd>
         <template #element>
           <img

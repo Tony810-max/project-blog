@@ -31,7 +31,7 @@ const handleCloseSidebar = (newVal) => {
 </script>
 
 <template>
-  <div class="py-2">
+  <div class="py-2 px-2">
     <img
       src="/src/assets/icons/justifyText.svg"
       alt="icon"

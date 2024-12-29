@@ -49,7 +49,7 @@ onMounted(() => {
       type="text"
     ></v-skeleton-loader>
   </div>
-  <div v-if="!isLoading" class="space-y-2">
+  <div v-if="!isLoading" class="space-y-2 px-2">
     <span class="font-sans text-2xl font-bold">Create Blog</span>
     <BlogForm
       @handle-blog="handleCreateBlog"
