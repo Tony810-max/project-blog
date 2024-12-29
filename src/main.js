@@ -19,6 +19,16 @@ const app = createApp(App);
 const vuetify = createVuetify({
   components,
   directives,
+  theme: {
+    defaultTheme: "light",
+    themes: {
+      light: {
+        colors: {
+          primary: "#0549ff", // Đặt giá trị màu chính của bạn
+        },
+      },
+    },
+  },
 });
 
 app.use(createPinia());

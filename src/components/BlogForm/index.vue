@@ -151,13 +151,16 @@ onUnmounted(() => {
   <form class="space-y-2" @submit.prevent="sendData">
     <v-text-field v-model.lazy="title" label="Title blog"></v-text-field>
 
-    <input
-      label="Image blog"
-      type="file"
-      accept="image/*"
-      @change="addImageBlog"
-      :disabled="isUploadImgBLog"
-    />
+    <v-text-field v-model.lazy="author" label="Author"></v-text-field>
+    <div class="flex gap-2 items-center">
+      <label class="text-base">Image blog</label>
+      <input
+        type="file"
+        accept="image/*"
+        @change="addImageBlog"
+        :disabled="isUploadImgBLog"
+      />
+    </div>
     <img v-if="urlImgBlog" :src="urlImgBlog" class="w-1/2 h-1/2" />
 
     <div class="border-black border py-1 px-4 rounded min-h-52 space-y-4">
@@ -190,7 +193,7 @@ onUnmounted(() => {
       </div>
       <editor-content :editor="editor" />
     </div>
-    <v-text-field v-model.lazy="author" label="Author"></v-text-field>
+
     <ElenmentEnd class="gap-2">
       <template #element>
         <Button

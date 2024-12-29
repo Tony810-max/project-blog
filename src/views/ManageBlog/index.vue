@@ -64,12 +64,14 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <SearchBlog @searchValue="handleSearchblog" />
-  <v-skeleton-loader v-if="!isLoading" type="table"></v-skeleton-loader>
-  <EmptyBlog v-if="blogData.list.length <= 0 && isLoading" />
-  <TableDataBlog
-    :blogData="blogData.list"
-    v-if="blogData.list.length > 0 && isLoading"
-    v-model:isLoading="isLoading"
-  />
+  <div class="space-y-2">
+    <SearchBlog @searchValue="handleSearchblog" />
+    <v-skeleton-loader v-if="!isLoading" type="table"></v-skeleton-loader>
+    <EmptyBlog v-if="blogData.list.length <= 0 && isLoading" />
+    <TableDataBlog
+      :blogData="blogData.list"
+      v-if="blogData.list.length > 0 && isLoading"
+      v-model:isLoading="isLoading"
+    />
+  </div>
 </template>
